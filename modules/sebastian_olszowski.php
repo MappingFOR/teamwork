@@ -2,7 +2,12 @@
 
 	class SEBASTIAN_OLSZOWSKI extends MODULE {
 		public function register() {
-			echo 'Zostałem załadowany do pamięci';
+			$this->addLog('Zostałem dodany');
+			$this->addLog( $this->add( 2,3 ) );
+		}
+		
+		public function add( $A, $B ) {
+			return $A + $B;
 		}
 		
 		public function run() {
