@@ -9,11 +9,14 @@
 			);
 			
 			echo $this->createFrame( 'Dodawanie liczb - modul Mariusza', $this->createForm( '?MO_MODULE', $Fields, 'POST' ) );
+			echo $this->createFrame( ' Okienko', 'Czesc, jestem Mariusz' );
 		}
 		
 		public function run() {
 			if( ($F1 = $this->getField('field_1', 0)) && ($F2 = $this->getField('field_2', 0)) ) {
 				echo $this->createFrame( 'Wynik dodawnia liczb', $F1 . ' + ' . $F2 . ' = ' . ($F1 + $F2) );
 			}
+			
+			echo 123;
 		}
 	}

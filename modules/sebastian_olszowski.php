@@ -11,6 +11,6 @@
 		}
 		
 		public function run() {
-			echo 1;
+			echo $this->createFrame('Modul Sebkoskiego uruchmiony!', 'Dziaua'); 
 		}
 	}
