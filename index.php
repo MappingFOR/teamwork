@@ -1,6 +1,6 @@
 <?php
 
-	define('DEBUG', true );
+	define('DEBUG', false );
 	define('MODULES', 'modules/' );
 	define('TXT_FILES', 'txt_files/' );
 
@@ -24,7 +24,7 @@
 	
 	foreach( get_declared_classes() as $CLASS ) {
 		if( get_parent_class( $CLASS ) == 'MODULE' ) {
-			$MODULES[] = new $CLASS;
+			$MODULES[$CLASS] = new $CLASS;
 		}
 	}
 	
@@ -42,6 +42,14 @@
 		print '<pre>';
 		print_r( $LOG );
 		print '</pre>';
+	}
+	
+	echo '<hr/>';
+	
+	foreach( $_GET as $MODULE => $PARAMS ) {
+		if( isSet( $MODULES[ $MODULE ] ) ) {
+			$MODULES[ $MODULE ]->run();
+		}
 	}
 
 ?>
