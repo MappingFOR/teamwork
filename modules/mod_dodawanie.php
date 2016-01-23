@@ -12,7 +12,11 @@
 		public function register() {
 			// Zaznaczenie, że moduł korzysta z sesji
 			$this->useSession();
-			
+			$this->addMenu( 'Moduł dodający', '?DODAWANIE' );
+		}
+		
+		// metoda uruchamiania modułu
+		public function run() {
 			// Przygotowanie pól formularza
 			$Fields = array(
 				array( 'Name' => 'field_1', 'Type' => 'Text' ),
@@ -21,23 +25,21 @@
 			);
 			
 			// Wyświetlanie ramki z powitaniem
-			echo $this->createFrame( ' Okienko', 'Czesc, jestem Mariusz' );
+			$this->createFrame( ' Okienko', 'Czesc, jestem Mariusz' );
 			
 			// Utworzenie ramki z formularzem, przekierowującego na ?DODAWANIE (co uruchamia metodę run())
-			echo $this->createFrame( 'Dodawanie liczb - modul Mariusza; Podaj liczby rozne od 0', $this->createForm( '?DODAWANIE', $Fields, 'POST' ) );
-		}
-		
-		// metoda uruchamiania modułu
-		public function run() {
+			$this->createFrame( 'Dodawanie liczb', $this->createForm( '?DODAWANIE', $Fields, 'POST' ) );
+			
+			
 			// pobranie liczb z formularza i dodanie
 			if( ($F1 = $this->getField('field_1', 0)) && ($F2 = $this->getField('field_2', 0)) ) {
-				echo $this->createFrame( 'Wynik dodawnia liczb', $F1 . ' + ' . $F2 . ' = ' . ($F1 + $F2) );
+				$this->createFrame( 'Wynik dodawnia liczb', $F1 . ' + ' . $F2 . ' = ' . ($F1 + $F2) );
 				
 				// zwiększenie zmiennej sesji o 1
 				$this->setSessionVariable( 'ilosc', $this->getSessionVariable( 'ilosc' ) + 1 );
 			}
 			
 			// wyświetlenie wartości zmiennej sesji
-			echo $this->createFrame( 'Ilosc dodawan', $this->getSessionVariable( 'ilosc' ) );
+			$this->createFrame( 'Ilosc dodawan', $this->getSessionVariable( 'ilosc' ) );
 		}
 	}

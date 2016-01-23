@@ -1,22 +1,24 @@
 <?php
 
-	define('DEBUG', false );
-	define('MODULES', 'modules/' );
-	define('TXT_FILES', 'txt_files/' );
+	define( 'DEBUG', false );
+	define( 'LIBS', 'libs/' );
+	define( 'CORE', 'core/' );
+	define( 'MODULES', 'modules/' );
+	define( 'TEMPLATES', 'templates/' );
+	define( 'TXT_FILES', 'txt_files/' );
 
 	include('module.class.php');
 	
-	if( is_dir( MODULES ) )
-	{
-		if ( $DIR = opendir( MODULES ) )
-		{
-			while( ( $FILE = readdir($DIR) ) !== false )
-			{
-				if( $FILE != '.' && $FILE != '..' )
-				include( MODULES . $FILE );
+	foreach( array(LIBS, CORE, MODULES) as $DIR_PATH ) {
+		if( is_dir( $DIR_PATH ) )	{
+			if ( $DIR = opendir( $DIR_PATH ) ) {
+				while( ( $FILE = readdir($DIR) ) !== false ) {
+					if( $FILE != '.' && $FILE != '..' )
+					include( $DIR_PATH . $FILE );
+				}
+				
+				closedir( $DIR );
 			}
-			
-			closedir( $DIR );
 		}
 	}
 	
@@ -45,12 +47,12 @@
 		print '</pre>';
 	}
 	
-	echo '<hr/>';
-	
 	foreach( $_GET as $MODULE => $PARAMS ) {
 		if( isSet( $MODULES[ $MODULE ] ) ) {
 			$MODULES[ $MODULE ]->run();
 		}
 	}
+	
+	$Template->render();
 
 ?>

@@ -45,24 +45,23 @@
 		}
 		
 		public function createFrame( $Title, $Text ) {
-			return '<fieldset><legend>'. $Title .'</legend>'. $Text .'</fieldset>';
+			TEMPLATE::$Structure->find('div#content', 0)->innertext .= '<div id="'. get_class( $this ).'block"><div class="title">'. $Title .'</div><div class="content">'. $Text .'</div></div>';
 		}
 		
 		public function createForm( $Action, $Structure, $Method ) {
 			$FormHTML = '<form action="' . $Action . '" method="' . $Method .'">';
 			
 			foreach( $Structure as $Field ) {
-				$FormHTML .= '<input type="'.$this->fieldHelper($Field, 'Type', '').'" name="'.$this->fieldHelper($Field, 'Name', '').'" value="'.$this->fieldHelper($Field, 'Value', '').'" />';
+				$FormHTML .= '<input type="'.$this->fieldHelper($Field, 'Type', '').'" name="'.$this->fieldHelper($Field, 'Name', '').'" value="'.$this->fieldHelper($Field, 'Value', '').'" /><br/>';
 			}
 			
 			$FormHTML .= '</form>';
 			return $FormHTML;
 		}
 		
-		/*
-		public function addMenu( $Href, $Title ) {
-			MODULE::$Menu[] = array( $Href, $Title );
-		}*/
+		public function addMenu( $Title, $Href ) {
+			TEMPLATE::$Structure->find('#modulesmenu', 0)->innertext .= '<a href="'. $Href .'">'.$Title.'</a>';
+		}
 		
 		public function addLog( $Text ) {
 			$this->Logger[] = $Text;
