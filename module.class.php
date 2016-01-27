@@ -44,6 +44,10 @@
 				return $None;
 		}
 		
+		public function alert( $msg ) {
+			TEMPLATE::$Structure->find('script', 0)->innertext .= '<alert>'.$msg.'</alert>';
+		}
+		
 		public function createFrame( $Title, $Text ) {
 			TEMPLATE::$Structure->find('div#content', 0)->innertext .= '<div id="'. get_class( $this ).'block"><div class="title">'. $Title .'</div><div class="content">'. $Text .'</div></div>';
 		}
