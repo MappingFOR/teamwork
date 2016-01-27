@@ -45,7 +45,7 @@
 		}
 		
 		public function alert( $msg ) {
-			TEMPLATE::$Structure->find('script', 0)->innertext .= '<alert>'.$msg.'</alert>';
+			TEMPLATE::$Structure->find('script', 0)->innertext .= 'alert("'.$msg.'");';
 		}
 		
 		public function createFrame( $Title, $Text ) {
