@@ -59,8 +59,18 @@
 			return $FormHTML;
 		}
 		
+		public function willRun() {
+			return isSet( $_GET[ get_class( $this ) ] );
+		}
+		
 		public function addMenu( $Title, $Href ) {
-			TEMPLATE::$Structure->find('#modulesmenu', 0)->innertext .= '<a href="'. $Href .'">'.$Title.'</a>';
+			//if( TEMPLATE::$Structure->find('a.module-'.get_class($this)) )
+			
+			TEMPLATE::$Structure->find('#modulesmenu', 0)->innertext .= '<a class="module-'.get_class($this).'" href="'. $Href .'">'.$Title.'</a>';
+		}
+		
+		public function addMenuSeparator() {
+			TEMPLATE:$Structure->find('#modulesmenu', 0)->innertext .= '<div class="separator"></div>';
 		}
 		
 		public function addLog( $Text ) {

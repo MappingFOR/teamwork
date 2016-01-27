@@ -10,10 +10,10 @@
 	include('module.class.php');
 	
 	foreach( array(LIBS, CORE, MODULES) as $DIR_PATH ) {
-		if( is_dir( $DIR_PATH ) )	{
+		if( is_dir( $DIR_PATH ) ) {
 			if ( $DIR = opendir( $DIR_PATH ) ) {
 				while( ( $FILE = readdir($DIR) ) !== false ) {
-					if( $FILE != '.' && $FILE != '..' )
+					if( $FILE != '.' && $FILE != '..' && $FILE[0] != '_' )
 					include( $DIR_PATH . $FILE );
 				}
 				
@@ -47,9 +47,12 @@
 		print '</pre>';
 	}
 	
-	foreach( $_GET as $MODULE => $PARAMS ) {
+	foreach( $_GET as $MODULE => $PARAM ) {
 		if( isSet( $MODULES[ $MODULE ] ) ) {
-			$MODULES[ $MODULE ]->run();
+			if( !empty( $PARAM ) )
+				$MODULES[ $MODULE ]->$PARAM();
+			else
+				$MODULES[ $MODULE ]->run();
 		}
 	}
 	
