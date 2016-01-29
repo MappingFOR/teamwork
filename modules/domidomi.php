@@ -3,17 +3,39 @@
 	class DOMIDOMI extends MODULE {
 		public function register() {
 			$this->useSession();
+			
+			if( empty( $this->getSessionVariable('lista') ) )
+				$this->setSessionVariable('lista', array());
+			
 			$this->addMenu('Lista zakupów', '?DOMIDOMI');
 			
 			if( ($Pole = $this->getField('nazwa', false)) != false ) {
-				$this->setSessionVariable('lista', array_merge(array($Pole), $this->getSessionVariable('lista') ) );
+				$Pole = array( 'Nazwa' => $this->getField('nazwa', false), 'Checked' => false );
+				
+				$this->setSessionVariable('lista', array_merge( array($Pole), $this->getSessionVariable('lista') ) );
 			}
-			
 		}
 		
 		public function run() {
-			echo '<style> li { list-style-type: none; } input[type="checkbox"]:checked ~ span { color: #F4F; }</style>';
-			$this->createFrame('Lista zakupow', '<ul><li><input type="checkbox" /><span>' . implode( '</span></li><li><input type="checkbox" checked /><span>', $this->getSessionVariable('lista') ) . '</span></li></ul><a href="?DOMIDOMI=VIEW">Dodaj nowy...</a>' );
+			echo '<style> .domidomi a { text-decoration: none; }  li { list-style-type: none; } input[type="checkbox"]:checked ~ span { color: #F4F; }</style>';
+			$PreHTMLed = '';
+			
+			if( !empty( $this->getSessionVariable('lista') ) )
+			foreach( $this->getSessionVariable('lista') as $ID => $Element ) {
+				$PreHTMLed .= '<a href="?DOMIDOMI=TOGGLE&ID='.$ID.'"><li><input type="checkbox" '.($Element['Checked'] ? 'checked' : '').' /> '. $Element['Nazwa'] .'</li></a>';
+			}
+			
+			$this->createFrame('Lista zakupow', ($PreHTMLed ? '<ul class="domidomi">'.$PreHTMLed.'</ul>' : '') . '<a href="?DOMIDOMI=VIEW">Dodaj nowy...</a>' );
+		}
+		
+		public function toggle() {
+			if( isSet( $_GET['ID'] ) )
+				if( !empty( $List = $this->getSessionVariable('lista') ) ) {
+					$List[ $_GET['ID'] ]['Checked'] = !$List[ $_GET['ID'] ]['Checked'];
+					$this->setSessionVariable('lista', $List);
+				}
+				
+			$this->run();
 		}
 		
 		public function view() {
@@ -24,7 +46,11 @@
 				array('Type' => 'submit', 'Value' => 'Dodaj')
 			);
 			
-			$this->createFrame( 'asd', $this->createForm( '.', $Fields, 'POST' ) );
+			$this->createFrame( 'Dodawanie elementu', $this->createForm( '?DOMIDOMI', $Fields, 'POST' ) );
+		}
+		
+		public function reset() {
+			$this->setSessionVariable('lista', array());
 		}
 	}
 	

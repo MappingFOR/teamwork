@@ -9,14 +9,16 @@
 	
 	class USER extends MODULE {
 		public function register() {
-			$this->addMenu( 'Użytkownik', '?USER' );
-			
+			$this->addMenuTitle( 'Użytkownik' );
+			$this->addMenu( 'Lista użytkowników', '?USER' );
+		
 			if( $this->willRun() ) {
-				$this->addMenu( '- Przeglądaj', '?USER=VIEW' );
-				$this->addMenu( '- Dodaj', '?USER=ADD' );
-				$this->addMenu( '- Edytuj', '?USER=EDIT' );		
-				//$this->addMenuSeparator();
+				$this->addMenu( 'Przeglądaj', '?USER=VIEW' );
+				$this->addMenu( 'Dodaj', '?USER=ADD' );
+				$this->addMenu( 'Edytuj', '?USER=EDIT' );
 			}
+			
+			$this->addMenuSeparator();
 		}
 		
 		public function run() {

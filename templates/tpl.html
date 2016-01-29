@@ -3,47 +3,142 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+        <link rel="stylesheet" href="./Styles/fontello-embedded.css" />
+
 		<script>
 		
 		</script>
 		<style>
-			* { font-family: "Segoe UI Light" }
 			body, html { margin: 0; display: flex; width: 100%; height: 100%; }
 			#left, #content { flex-basis: 0; flex-grow: 1; }
 			#left { max-width: 280px; min-width: 280px; background: #EEE; }
+		
 			
-			#modulesmenu a {
-				display: block;
-				line-height: 40px;
-				padding: 0 18px;
-				transition: all 200ms;
-				color: inherit;
-				text-decoration: none;
-			}
 			
-			#modulesmenu a:hover {
-				background: rgba(0,0,0,.5);
-				color: #FFF;
-			}
-			
-			#content .title { 
-				padding: 0 8px;
-				line-height: 38px;
-				font-weight: 800;
-			}
-			
-			#content .content {
-				padding: 8px 12px;
-			}
+            @font-face {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 400;
+                src: url('Fonts/OpenSans-Regular.ttf') format('truetype');
+            }
+
+            @font-face {
+                font-family: 'Open Sans Light';
+                font-style: normal;
+                font-weight: 300;
+                src: url('Fonts/OpenSans-Light.ttf') format('truetype');
+            }
+
+
+            @font-face {
+                font-family: 'Open Sans Bold';
+                font-style: normal;
+                font-weight: 600;
+                src: url('Fonts/OpenSans-Bold.ttf') format('truetype');
+            }
+
+            * { font-family: "Open Sans";  }
+
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+            }
+
+            .wrapper {
+                height: 100%;
+                display: flex;
+                padding-left: 281px;
+            }
+
+            .left, .right {
+                flex-grow: 1;
+                flex-basis: 0;
+                height: 100%;
+            }
+
+            #left {
+                background: rgb(245, 245, 245);
+                max-width: 280px;
+                min-width: 280px;
+                border-right: 1px solid #ccc;
+                top: 0;
+                left: 0;
+            }
+
+            #left .nav {
+                text-transform: uppercase;
+                font-weight: 600;
+                line-height: 40px;
+                padding-left: 35px;
+                padding-top: 40px;
+
+                font-size: 14px;
+            }
+
+            #left a {
+                display: block;
+                line-height: 40px;
+                color: #3572b0;
+                text-decoration: none;
+            }
+
+            #left a:hover {
+                background: rgb(230,230,230);
+            }
+
+            #left a div {
+                display: inline-block;
+            }
+
+            #left a div:first-child {
+                color: #000;
+                width: 40px;
+                font-size: 16px;
+                text-align: right;
+            }
+
+            #left .separator {
+                height: 1px;
+                width: 90%;
+                background: #ccc;
+                margin: 5px auto;
+            }
+
+            .right {
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                margin: 10px;
+                display: block;
+                flex-basis: 100%;
+            }
+
+            .note {
+                margin: 5px;
+                max-width: 25%;
+                min-width: 25%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background: #eee;
+                word-break: break-all;
+            }
+
+            .nostyletype {
+                list-style-type: none;
+                padding-left: 15px;
+            }
+
 		</style>
 	</head>
 	<body>
-		<div id="left">
+		<div id="left" class="left">
 			<div id="modulesmenu">
 			
 			</div>
 		</div>
-		<div id="content">
+		<div id="content" class="right">
 		
 		</div>
 	</body>

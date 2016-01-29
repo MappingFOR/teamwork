@@ -3,8 +3,11 @@
 	class WEZ_PIERNICZKA extends MODULE {
 		public function register() {
 			$this->useSession();
+			
+			$this->addMenuTitle('Panel piernikowy');
 			$this->addMenu('Panel jedzenia pierników', '?WEZ_PIERNICZKA');
 			$this->addMenu('Zdobądź pierniki! <3', '?WEZ_PIERNICZKA=runget');
+			$this->addMenuSeparator();
 		}
 
 		public function run() {
