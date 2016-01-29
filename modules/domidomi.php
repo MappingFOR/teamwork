@@ -4,8 +4,9 @@
 		public function register() {
 			$this->useSession();
 			
-			if( empty( $this->getSessionVariable('lista') ) )
-				$this->setSessionVariable('lista', array());
+			if( empty( $this->getSessionVariable('lista') ) ) {
+				$this->setSessionVariable('lista', array( array('Nazwa' => 'Mariusz', 'Checked' => true), array('Nazwa' => 'Dominika', 'Checked' => false), array('Nazwa' => 'Pierniczky', 'Checked' => true) ));
+			}
 			
 			$this->addMenu('Lista zakupów', '?DOMIDOMI');
 			
@@ -25,7 +26,7 @@
 				$PreHTMLed .= '<a href="?DOMIDOMI=TOGGLE&ID='.$ID.'"><li><input type="checkbox" '.($Element['Checked'] ? 'checked' : '').' /> '. $Element['Nazwa'] .'</li></a>';
 			}
 			
-			$this->createFrame('Lista zakupow', ($PreHTMLed ? '<ul class="domidomi">'.$PreHTMLed.'</ul>' : '') . '<a href="?DOMIDOMI=VIEW">Dodaj nowy...</a>' );
+			$this->createFrame('Do wzięcia', ($PreHTMLed ? '<ul class="domidomi">'.$PreHTMLed.'</ul>' : '') . '<a href="?DOMIDOMI=VIEW">Dodaj nowy...</a>' );
 		}
 		
 		public function toggle() {
